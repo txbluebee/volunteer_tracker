@@ -26,7 +26,7 @@ describe(Volunteer) do
     it('saves the volunteer to the array of all volunteers') do
       test_volunteer = Volunteer.new({:id=> nil, :name => 'Brian', :project_id => 1})
       test_volunteer.save()
-      test_volunteer2 = Volunteer.new({:id=> nil, :name => 'Brian', :project_id => 2})
+      test_volunteer2 = Volunteer.new({:id=> nil, :name => 'Lily', :project_id => 2})
       test_volunteer2.save()
       expect(Volunteer.all).to(eq([test_volunteer, test_volunteer2]))
     end
