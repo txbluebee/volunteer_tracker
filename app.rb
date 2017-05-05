@@ -32,3 +32,9 @@ get('/volunteers') do
   @volunteers = Volunteer.all()
   erb(:volunteers)
 end
+
+#View individual volunteer
+get('/volunteers/:id') do
+  @volunteer = Volunteer.find(params.fetch('id').to_i())
+  erb(:volunteer)
+end

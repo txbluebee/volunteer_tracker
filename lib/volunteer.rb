@@ -30,14 +30,25 @@ class Volunteer
     @id = result.first().fetch('id').to_i()
   end
 
- def update(attributes)
-  @name = attributes.fetch(:name)
-  @id = self.id()
-  DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{@id};")
- end
+  def self.find(id)
+    found_volunteer = nil
+    Volunteer.all().each() do |volunteer|
+      if volunteer.id() == id
+        found_volunteer = volunteer
+      end
+    end
+    found_volunteer  
+  end
 
- def delete
-   DB.exec("DELETE FROM volunteers WHERE id = #{self.id()};")
- end
+
+  def update(attributes)
+    @name = attributes.fetch(:name)
+    @id = self.id()
+    DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM volunteers WHERE id = #{self.id()};")
+  end
 
 end
