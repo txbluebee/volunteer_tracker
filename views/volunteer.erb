@@ -2,7 +2,7 @@
   <a href="/">Home</a>
   <h5>Volunteer ID: <%= @volunteer.id() %></h5>
   <h5>Volunteer Name: <%= @volunteer.name() %></h5>
-  <h5>Volunteer Project: <%= %></h5>
+  <h5>Volunteer Project: <%= @volunteer.project %></h5>
 
 <a href="/volunteers/<%= @volunteer.id() %>/edit" role="button" class="btn btn-danger">Edit</a>
 </div>
