@@ -65,6 +65,27 @@ describe(Project) do
       test_volunteer2.save()
       expect(test_project.volunteers()).to(eq([test_volunteer, test_volunteer2]))
     end
+  end
 
+  describe('#delete') do
+    it('deletes the project from array of all projects') do
+      test_project = Project.new({:description => "Clean Up Seattle", :id => nil})
+      test_project.save()
+      test_project2 = Project.new({:description => "Clean Up Portland", :id => nil})
+      test_project2.save()
+      test_project.delete()
+      expect(Project.all()).to(eq([test_project2]))
+    end
+
+    it('deletes the volunteers under deleted project') do
+      test_project = Project.new({:description => "Clean Up Seattle", :id => nil})
+      test_project.save()
+      test_volunteer = Volunteer.new({:name => 'Brian', :project_id => test_project.id()})
+      test_volunteer.save()
+      test_volunteer2 = Volunteer.new({:name => 'Lily', :project_id => test_project.id()})
+      test_volunteer2.save()
+      test_project.delete()
+      expect(Volunteer.all()).to(eq([]))
+    end
   end
 end
