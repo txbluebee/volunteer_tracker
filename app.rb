@@ -38,3 +38,11 @@ get('/volunteers/:id') do
   @volunteer = Volunteer.find(params.fetch('id').to_i())
   erb(:volunteer)
 end
+
+#Edit individual volunteer
+get('/volunteers/:id/edit') do
+  @volunteer = Volunteer.find(params.fetch('id').to_i())
+  erb(:volunteer_edit_form)
+end
+
+#Update name for volunteer

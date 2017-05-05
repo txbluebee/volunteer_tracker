@@ -12,3 +12,6 @@ describe('adding a new volunteer', {:type => :feature}) do
     expect(page).to have_content('Brian')
   end
 end
+
+
+end
