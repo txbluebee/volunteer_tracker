@@ -31,4 +31,5 @@ describe(Volunteer) do
       expect(Volunteer.all).to(eq([test_volunteer, test_volunteer2]))
     end
   end
+
 end
