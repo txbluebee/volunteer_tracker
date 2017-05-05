@@ -46,9 +46,10 @@ class Project
     volunteers_in_project = DB.exec("SELECT * FROM volunteers WHERE project_id = #{self.id()};")
     project_volunteers = []
     volunteers_in_project.each() do |volunteer|
+      id = volunteer.fetch('id').to_i()
       name = volunteer.fetch('name')
       project_id = self.id().to_i()
-      project_volunteers.push(Volunteer.new({:name => name, :project_id => project_id}))
+      project_volunteers.push(Volunteer.new({:id => id, :name => name, :project_id => project_id}))
     end
     project_volunteers
   end
