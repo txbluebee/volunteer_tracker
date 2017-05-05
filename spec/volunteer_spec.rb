@@ -65,4 +65,14 @@ describe(Volunteer) do
       expect(Volunteer.find(test_volunteer.id())).to(eq(test_volunteer))
     end
   end
+
+  describe('#project') do
+    it('returns the project for the volunteer') do
+      test_project = Project.new({:description => "Clean Up Seattle", :id => nil})
+      test_project.save()
+      test_volunteer = Volunteer.new({:id=> nil, :name => 'Brian', :project_id => test_project.id()})
+      test_volunteer.save()
+      expect(test_volunteer.project()).to(eq("Clean Up Seattle"))
+    end
+  end
 end

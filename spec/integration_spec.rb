@@ -5,9 +5,12 @@ set(:show_exceptions, false)
 
 describe('adding a new volunteer', {:type => :feature}) do
   it('allows a user to add a volunteer and see details for it') do
+    test_project = Project.new({:description => "Clean Up Seattle", :id => nil})
+    test_project.save()
     visit('/')
     click_link('Add New Volunteer')
     fill_in('name', :with =>'Brian')
+    select('Clean Up Seattle', from: 'project_id')
     click_button('Add')
     expect(page).to have_content('Brian')
   end

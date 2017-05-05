@@ -6,7 +6,7 @@ require('pry')
 require('pg')
 also_reload('lib/**/*.rb')
 
-DB = PG.connect({:dbname => "volunteer_tracker_test"})
+DB = PG.connect({:dbname => "volunteer_tracker"})
 
 #Home Page
 get('/') do
@@ -15,13 +15,15 @@ end
 
 #Add volunteer
 get('/volunteers/new') do
+  @projects = Project.all()
   erb(:volunteer_form)
 end
 
 #Post new volunteer
 post('/volunteers') do
   name = params.fetch('name')
-  new_volunteer = Volunteer.new({:id => nil, :name => name})
+  project_id = params.fetch('project_id')
+  new_volunteer = Volunteer.new({:id => nil, :name => name, :project_id => project_id})
   new_volunteer.save()
   @volunteers = Volunteer.all()
   erb(:volunteers)
