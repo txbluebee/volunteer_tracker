@@ -60,3 +60,49 @@ delete('/volunteers/:id') do
   @volunteers = Volunteer.all()
   erb(:volunteers)
 end
+
+#Add project
+get('/projects/new') do
+  erb(:project_form)
+end
+
+#Post new project
+post('/projects') do
+  description = params.fetch('description')
+  new_project = Project.new({:id => nil, :description => description})
+  new_project.save()
+  @projects = Project.all()
+  erb(:projects)
+end
+
+#View all projects
+get('/projects') do
+  @projects = Project.all()
+  erb(:projects)
+end
+
+#View individual project
+get('/projects/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  erb(:project)
+end
+
+#Edit individual project
+get('/projects/:id/edit') do
+  @project = Project.find(params.fetch('id').to_i())
+  erb(:project_edit_form)
+end
+
+patch('/projects/:id') do
+  description = params.fetch('description')
+  @project = Project.find(params.fetch('id').to_i())
+  @project.update({:description => description})
+  erb(:project)
+end
+
+delete('/projects/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  @project.delete()
+  @projects = Project.all()
+  erb(:projects)
+end

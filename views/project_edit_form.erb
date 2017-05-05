@@ -1,0 +1,21 @@
+<div class="container">
+  <h5>Project ID: <%= @project.id() %></h5>
+  <h5>Description: <%= @project.description() %></h5>
+
+  <form action="/projects/<%= @project.id() %>" method="post">
+    <input name="_method" type="hidden" value="patch">
+    <div class="form-group">
+      <label for="description"><b>New Description: </b></label>
+      <input id="description" name="description" type="text"  class="form-control">
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+
+  <form action="/projects/<%= @project.id() %>" method="post">
+    <input name="_method" type="hidden" value="delete">
+    <button type="submit" class="btn btn-danger mt-3">Delete</button>
+    </div>
+  </form>
+
+
+</div>

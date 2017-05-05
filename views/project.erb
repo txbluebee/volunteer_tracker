@@ -1,0 +1,7 @@
+<div class="container">
+  <h5>Project ID: <%= @project.id()%></h5>
+
+  <h1><%= @project.description().upcase() %></h1>
+  <a href="/projects/<%= @project.id() %>/edit" role="button" class="btn btn-danger">Edit</a>
+
+</div>
