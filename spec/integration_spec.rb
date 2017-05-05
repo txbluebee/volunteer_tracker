@@ -13,14 +13,14 @@ describe('adding a new volunteer', {:type => :feature}) do
   end
 end
 
-describe('edit volunteer info', {:type => :feature}) do
-  it('allows a user to update the name of volunteer') do
-    test_volunteer = Volunteer.new({:id=> nil, :name => 'Brian', :project_id => 1})
+describe('seeing all volunteers added to the project', {:type => :feature}) do
+  it('allows a user to add volunteers to project and details for it') do
+    test_project = Project.new({:description => "Clean Up Seattle", :id => nil})
+    test_project.save()
+    test_volunteer = Volunteer.new({:id=> nil, :name => 'Brian', :project_id => test_project.id()})
     test_volunteer.save()
-    visit('/volunteers/:id')
-    click_button('Edit')
-    fill_in('name', :with => 'Lily')
-    click_button('Update')
-    expect(page).to have_content('Lily')
+    visit('/projects')
+    click_link(test_project.description())
+    expect(page).to have_content(test_volunteer.name())
   end
 end

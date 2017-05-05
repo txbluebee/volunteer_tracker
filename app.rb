@@ -87,12 +87,25 @@ get('/projects/:id') do
   erb(:project)
 end
 
+#Post new volunteers to project
+post('/project_volunteers') do
+  name = params.fetch('name')
+  project_id = params.fetch('project_id').to_i()
+  new_volunteer = Volunteer.new({:id => nil, :name => name, :project_id => project_id})
+  new_volunteer.save()
+  @volunteers = Volunteer.all()
+  @project = Project.find(project_id);
+  erb(:project)
+end
+
+
 #Edit individual project
 get('/projects/:id/edit') do
   @project = Project.find(params.fetch('id').to_i())
   erb(:project_edit_form)
 end
 
+#Update project description
 patch('/projects/:id') do
   description = params.fetch('description')
   @project = Project.find(params.fetch('id').to_i())
@@ -100,6 +113,7 @@ patch('/projects/:id') do
   erb(:project)
 end
 
+#delete project
 delete('/projects/:id') do
   @project = Project.find(params.fetch('id').to_i())
   @project.delete()

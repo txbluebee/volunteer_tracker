@@ -1,7 +1,33 @@
 <div class="container">
+  <a href="/">Home Page</a>
   <h5>Project ID: <%= @project.id()%></h5>
-
   <h1><%= @project.description().upcase() %></h1>
+
+  <% if @project.volunteers().any?  %>
+    <ul>
+      <% @project.volunteers().each() do |volunteer| %>
+        <li><a href="/volunteers/<%= volunteer.id() %>"><%= volunteer.name()%></a></li>
+      <% end  %>
+    </ul>
+  <% else %>
+    <p>No volunteers for the this project</p>
+  <% end  %>
+
+
   <a href="/projects/<%= @project.id() %>/edit" role="button" class="btn btn-danger">Edit</a>
 
+  <!-- Add Volunteers -->
+  <button class="btn btn-success add-volunteer">Add Volunters</button>
+
+  <div id="add-volunteers-form">
+    <form action="/project_volunteers" method="post">
+      <h3>Add Volunteer for <%= @project.description().upcase() %></h3>
+      <div class="form-group">
+        <input id="project_id" name="project_id" type="hidden" value="<%= @project.id() %>">
+        <label for="name">Name: </label>
+        <input id="name" name="name" type="text"  class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+  </div>
 </div>

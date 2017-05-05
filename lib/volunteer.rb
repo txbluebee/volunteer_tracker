@@ -37,7 +37,7 @@ class Volunteer
         found_volunteer = volunteer
       end
     end
-    found_volunteer  
+    found_volunteer
   end
 
 
