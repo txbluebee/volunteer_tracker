@@ -38,4 +38,33 @@ describe(Project) do
     end
   end
 
+  describe('.find') do
+    it('find the project based on its id number') do
+      test_project = Project.new({:description => "Clean Up Seattle", :id => nil})
+      test_project.save()
+      expect(Project.find(test_project.id)).to(eq(test_project))
+    end
+  end
+
+  describe('#update') do
+    it('lets you update the description of the project') do
+      test_project = Project.new({:description => "Clean Up Seattle", :id => nil})
+      test_project.save()
+      test_project.update({:description => "Clean Up Portland"})
+      expect(test_project.description).to(eq("Clean Up Portland"))
+    end
+  end
+
+  describe('#volunteers') do
+    it('retuns the volunteers for the project') do
+      test_project = Project.new({:description => "Clean Up Seattle", :id => nil})
+      test_project.save()
+      test_volunteer = Volunteer.new({:name => 'Brian', :project_id => test_project.id()})
+      test_volunteer.save()
+      test_volunteer2 = Volunteer.new({:name => 'Lily', :project_id => test_project.id()})
+      test_volunteer2.save()
+      expect(test_project.volunteers()).to(eq([test_volunteer, test_volunteer2]))
+    end
+
+  end
 end
