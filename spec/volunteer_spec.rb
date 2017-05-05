@@ -32,6 +32,14 @@ describe(Volunteer) do
     end
   end
 
+  describe('#id') do
+    it('returns id number as integer class') do
+      test_volunteer = Volunteer.new({:id=> nil, :name => 'Brian', :project_id => 1})
+      test_volunteer.save()
+      expect(test_volunteer.id()).to(be_instance_of(Fixnum))
+    end
+  end
+
   describe('#update') do
     it('lets you update the name of volunteers') do
       test_volunteer = Volunteer.new({:id=> nil, :name => 'Brian', :project_id => 1})

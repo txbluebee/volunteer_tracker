@@ -4,7 +4,7 @@ class Volunteer
   def initialize(attributes)
     @id = attributes.fetch(:id)
     @name = attributes.fetch(:name)
-    @project_id = attributes.fetch(:project_id)
+    @project_id = attributes.fetch(:project_id, 1)
   end
 
   def ==(another_volunteer)
@@ -38,6 +38,6 @@ class Volunteer
 
  def delete
    DB.exec("DELETE FROM volunteers WHERE id = #{self.id()};")
- end 
+ end
 
 end
