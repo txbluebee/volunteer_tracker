@@ -8,6 +8,13 @@
       <input id="name" name="name" type="text"  class="form-control">
     </div>
     <button type="submit" class="btn btn-success">Update</button>
+  </form>
+
+  <form action="/volunteers/<%= @volunteer.id() %>" method="post">
+    <input name="_method" type="hidden" value="delete">
+    <button type="submit" class="btn btn-danger mt-3">Delete</button>
     </div>
   </form>
+
+
 </div>

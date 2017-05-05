@@ -46,3 +46,17 @@ get('/volunteers/:id/edit') do
 end
 
 #Update name for volunteer
+patch('/volunteers/:id') do
+  @volunteer = Volunteer.find(params.fetch('id').to_i())
+  new_name = params.fetch('name')
+  @volunteer.update({:name => new_name})
+  erb(:volunteer)
+end
+
+#Delete volunteer
+delete('/volunteers/:id') do
+  @volunteer = Volunteer.find(params.fetch('id').to_i())
+  @volunteer.delete()
+  @volunteers = Volunteer.all()
+  erb(:volunteers)
+end
