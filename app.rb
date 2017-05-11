@@ -22,7 +22,9 @@ end
 #Post new volunteer
 post('/volunteers') do
   name = params.fetch('name')
+    binding.pry
   project_id = params.fetch('project_id')
+
   new_volunteer = Volunteer.new({:id => nil, :name => name, :project_id => project_id})
   new_volunteer.save()
   @volunteers = Volunteer.all()

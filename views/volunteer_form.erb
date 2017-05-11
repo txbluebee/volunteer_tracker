@@ -11,11 +11,13 @@
         <% @projects.each() do |project| %>
           <option value="<%= project.id()%>"> <%= project.description() %> </option>
         <% end %>
-          <option value="0"> No project </option>
+
         </select>
       </div>
     <% else  %>
-        <p>No Project added yet!</p>
+      <select id='project_id' name='project_id' type='text'>
+        <option value="0"> No project </option>
+      </select>
     <% end  %>
 
     <div class="form-group">
