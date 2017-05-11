@@ -44,14 +44,15 @@ end
 #Edit individual volunteer
 get('/volunteers/:id/edit') do
   @volunteer = Volunteer.find(params.fetch('id').to_i())
+  @projects = Project.all()
   erb(:volunteer_edit_form)
 end
 
 #Update name for volunteer
 patch('/volunteers/:id') do
   @volunteer = Volunteer.find(params.fetch('id').to_i())
-  new_name = params.fetch('name')
-  @volunteer.update({:name => new_name})
+  project_id = params.fetch('project_id').to_i()
+  @volunteer.update({:project_id => project_id})
   erb(:volunteer)
 end
 

@@ -11,6 +11,7 @@
         <% @projects.each() do |project| %>
           <option value="<%= project.id()%>"> <%= project.description() %> </option>
         <% end %>
+          <option value="0"> No project </option>
         </select>
       </div>
     <% else  %>
@@ -18,7 +19,6 @@
     <% end  %>
 
     <div class="form-group">
-      <input id="project_id" name="project_id" type="hidden" value="1">
       <label for="name">Name: </label>
       <input id="name" name="name" type="text"  class="form-control">
     </div>

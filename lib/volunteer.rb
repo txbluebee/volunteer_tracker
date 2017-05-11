@@ -4,7 +4,7 @@ class Volunteer
   def initialize(attributes)
     @id = attributes.fetch(:id)
     @name = attributes.fetch(:name)
-    @project_id = attributes.fetch(:project_id, 1)
+    @project_id = attributes.fetch(:project_id)
   end
 
   def ==(another_volunteer)
@@ -42,9 +42,9 @@ class Volunteer
 
 
   def update(attributes)
-    @name = attributes.fetch(:name)
+    @project_id = attributes.fetch(:project_id)
     @id = self.id()
-    DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{@id};")
+    DB.exec("UPDATE volunteers SET project_id = #{@project_id} WHERE id = #{@id};")
   end
 
   def delete
@@ -53,7 +53,11 @@ class Volunteer
 
   def project
     project_id = self.project_id
-    result = DB.exec("SELECT * FROM projects WHERE id = #{project_id};")
-    description = result.first().fetch('description')
+    if project_id != 0
+      result = DB.exec("SELECT * FROM projects WHERE id = #{project_id};")
+      description = result.first().fetch('description')
+    else
+      "No project assigned"
+    end
   end
 end

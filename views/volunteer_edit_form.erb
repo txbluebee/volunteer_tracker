@@ -3,11 +3,21 @@
   <h5>Volunteer Name: <%= @volunteer.name() %></h5>
   <form action="/volunteers/<%= @volunteer.id() %>" method="post">
     <input name="_method" type="hidden" value="patch">
-    <div class="form-group">
-      <label for="name"><b>New Name: </b></label>
-      <input id="name" name="name" type="text"  class="form-control">
-    </div>
-    <button type="submit" class="btn btn-success">Update</button>
+
+   <% if @projects.any?()  %>
+      <div class="form-group">
+        <label for="project_id">Select a Project</label>
+        <select id='project_id' name='project_id' type='text'>
+        <% @projects.each() do |project| %>
+          <option value="<%= project.id()%>"> <%= project.description() %> </option>
+        <% end %>
+          <option value="0"> No project </option>
+        </select>
+      </div>
+    <% else  %>
+        <p>No Project added yet!</p>
+    <% end  %>
+      <button type="submit" class="btn btn-success">Update</button>
   </form>
 
   <form action="/volunteers/<%= @volunteer.id() %>" method="post">
